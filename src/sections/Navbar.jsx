@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { socials } from './../constants/index';
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -9,14 +9,44 @@ const Navbar = () => {
   const contactRef = useRef(null);
   const topLineRef = useRef(null);
   const bottomLineRef = useRef(null);
+  const tl = useRef(null);
+  const iconTl = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [showIcon, setShowIcon] = useState(true);
+
+
+
+  useEffect(()=>{
+    let lastScrollY = window.scrollY;
+    const handleClick= ()=>{
+      const currentScrollY = window.scrollY;
+      console.log(currentScrollY, lastScrollY);
+      setShowIcon(currentScrollY <= lastScrollY || currentScrollY < 10);
+
+  };
+  window.addEventListener("scroll", handleClick,{
+    passive: true
+  });
+
+  return()=> window.removeEventListener("scroll", handleClick)
+
+
+  },[])
+
+
+
+
+
+
 
   useGSAP(()=>{
-    // gsap.set(navRef.current,{
-    //   xPercent: 100
-    // })
-    // gsap.set(linksRef.current,contactRef,{autoAlpha: 0, x: -20})
+    gsap.set(navRef.current,{
+      xPercent: 100
+    })
+    gsap.set([linksRef.current,contactRef.current],{autoAlpha: 0, x: -20})
 
-    gsap.timeline({paused: true})
+
+    tl.current = gsap.timeline({paused: true})
     .to(navRef.current,{
       xPercent: 0,
       duration: 1,
@@ -37,6 +67,34 @@ const Navbar = () => {
     }, "<+0.2")
   })
 
+  useGSAP(()=> {
+    iconTl.current = gsap.timeline(
+      {paused:true,duration:0.3, ease: "power2.inOut"}
+    )
+    .to(topLineRef.current,{
+      rotation: 45,
+      y: 3.3,
+    })
+    .to(bottomLineRef.current,{
+      rotation: -45,
+      y: -3.3,
+    }, "<")
+  })
+  const toggleMenu = () =>{
+    if(!isOpen){
+      tl.current.play();
+      iconTl.current.play();
+    }else{
+      tl.current.reverse();
+      iconTl.current.reverse();
+    }
+    setIsOpen(!isOpen)
+
+
+
+
+
+  }
   
   return (
     <>
@@ -73,7 +131,10 @@ const Navbar = () => {
         </div>  
       </nav>
       <div className="fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 
-      bg-black rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10">
+      bg-black rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10"
+      onClick={toggleMenu}
+      style={showIcon ? {"clipPath": "circle(50% at 50% 50%)"} : {"clipPath": "circle(0% at 50% 50%)"}}
+      >
         
         <span ref={topLineRef} className="block w-8 h-0.5 bg-white rounded-full origin-center">
         </span>
