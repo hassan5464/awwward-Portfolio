@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { socials } from './../constants/index';
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { Link } from 'react-scroll';
 
 const Navbar = () => {
   const linksRef = useRef([]);
@@ -19,10 +20,9 @@ const Navbar = () => {
   useEffect(()=>{
     let lastScrollY = window.scrollY;
     const handleClick= ()=>{
-      const currentScrollY = window.scrollY;
-      console.log(currentScrollY, lastScrollY);
+      let  currentScrollY = window.scrollY;
       setShowIcon(currentScrollY <= lastScrollY || currentScrollY < 10);
-
+      lastScrollY = currentScrollY;
   };
   window.addEventListener("scroll", handleClick,{
     passive: true
@@ -84,6 +84,7 @@ const Navbar = () => {
     if(!isOpen){
       tl.current.play();
       iconTl.current.play();
+
     }else{
       tl.current.reverse();
       iconTl.current.reverse();
@@ -105,8 +106,8 @@ const Navbar = () => {
         md:text-6xl lg:text-8xl">
           {["home", "services", "about", "work", "contact"].map((section, index)=>(
             <div ref={(el) =>(linksRef.current[index] = el)} key={index}>
-              <a className='transition-all duration-300 cursor-pointer
-                hover:text-white '>{section}</a>
+              <Link className='transition-all duration-300 cursor-pointer
+                hover:text-white ' to={`${section}`} smooth duration={2000} offset={0}>{section}</Link>
             </div>
           ))}
         </div>
@@ -119,11 +120,11 @@ const Navbar = () => {
             <p className='tracking-wider text-white/50'>Social Media</p>
             <div className="flex flex-col flex-wrap md:flex-row gap-x-2">
               {socials.map((social, index)=>(
-                <a key={index} href={social.href} className='text-sm leading-loose tracking-widest uppercase
+                <a key={index} to={social.href} className='text-sm leading-loose tracking-widest uppercase
                   hover:text-white transition-colors duration-300 '>
-                  {"{"}
+                  {"{ "}
                   {social.name}
-                  {"}"}
+                  {" }"}
                 </a>
               ))}
             </div>  
