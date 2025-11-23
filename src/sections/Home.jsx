@@ -1,9 +1,77 @@
-import React from 'react'
+import React, { useRef } from 'react'
+import AnimatedTextLines from '../components/AnimatedTextLines';
+import { useGSAP } from '@gsap/react';
+import gsap from "gsap"
 
 const Home = () => {
+  const contextRef = useRef(null);
+  const headerRef = useRef(null);
+  const aboutText = `I help growing brands and startups gain an 
+  unfair advantage through premium 
+results driven webs/apps`;
+
+
+useGSAP(()=>{
+  const tl = gsap.timeline();
+
+  tl.from(contextRef.current,{
+    y: "50vh",
+    duration:1,
+    ease: "circ.out"
+  })
+
+  tl.from(headerRef.current,{
+    opacity: 0,
+    y: 200,
+    duration:1,
+    ease: "circ.out"
+  },"<0.2")
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
-    <div>Home</div>
-  )
+    <scetion id="home" className="flex flex-col justify-end min-h-screen"
+    >
+      <div ref={contextRef} >
+        <div style={{clipPath:"polygon(0 0,100% 0, 100% 100% , 0 100%)"}}>
+          <div ref={headerRef} className="flex flex-col justify-center gap-12 pt-16 sm:gap-16">
+            <p className="text-sm font-light uppercase px-10 text-black">
+              404 No Bugs Found
+            </p>
+            <h1 className="flex flex-col flex-wrap text-black gap-16 sm:gap-16 md:block uppercase banner-text-responsive">
+              mohamed MonGe
+            </h1>
+
+            
+          </div>
+          
+        </div>
+        <div className="relative px-10 text-black">
+          <div className="absolute inset-x-0  border-t-2"/>
+          <div className="py-12 sm:py-16 text-end">
+            <AnimatedTextLines text={aboutText} className="font-light text-black/70 uppercase value-text-responsive"/>
+            
+
+        
+          </div>
+        </div>
+      </div>
+      <figure className="absolute inset-0 -z-50" style={{width: "100vw", height: "100vh"}}>
+        {/* <Canvas shadows camera={{position: [0,0,-10], fov: 17.5 ,near:1,far: 20}}></Canvas> */}
+      </figure>
+    </scetion>
+  )                                
 }
 
 export default Home
