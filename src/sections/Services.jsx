@@ -1,8 +1,9 @@
-import React from 'react'
 
 const Services = () => {
   return (
-    <div>Services</div>
+    <section id="services" className="min-h-screen bg-black rounded-t-4xl">
+      <div></div>
+    </section>
   )
 }
 
