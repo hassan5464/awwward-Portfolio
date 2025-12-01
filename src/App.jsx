@@ -3,6 +3,7 @@ import Home from './sections/Home'
 import ServiceSummary from './sections/ServiceSummary'
 import Services from './sections/Services'
 import ReactLenis from 'lenis/react'
+import About from './sections/About'
 
 function App() {
 
@@ -13,9 +14,8 @@ function App() {
       <Home/>
       <ServiceSummary/>
       <Services />
-      <section id="home" className="w-screen min-h-screen bg-gradient-to-b to-left from-[#3d7eaa] to-[#ffe47a] ">
-      </section>
-      <section id="about" className="w-screen min-h-screen bg-gradient-to-l from-[#3d7eaa] to-[#ffe47a] ">
+      <About />
+      <section id="hii" className="w-screen min-h-screen bg-gradient-to-l from-[#3d7eaa] to-[#ffe47a] ">
       </section>
     </ReactLenis>
   )
