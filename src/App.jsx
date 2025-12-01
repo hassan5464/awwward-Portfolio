@@ -1,13 +1,14 @@
-import { useState } from 'react'
 import Navbar from './sections/Navbar'
 import Home from './sections/Home'
 import ServiceSummary from './sections/ServiceSummary'
 import Services from './sections/Services'
+import ReactLenis from 'lenis/react'
 
 function App() {
 
   return (
-    <div className='relative w-screen min-h-screen overflow-x-auto'>
+
+    <ReactLenis root className='relative w-screen min-h-screen overflow-x-auto'>
       <Navbar />
       <Home/>
       <ServiceSummary/>
@@ -16,7 +17,7 @@ function App() {
       </section>
       <section id="about" className="w-screen min-h-screen bg-gradient-to-l from-[#3d7eaa] to-[#ffe47a] ">
       </section>
-    </div>
+    </ReactLenis>
   )
 }
 

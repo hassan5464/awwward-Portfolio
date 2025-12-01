@@ -1,19 +1,26 @@
-import { Planet } from '../components/Planet';
-import { Canvas } from '@react-three/fiber';
-import { Environment, Float, Lightformer } from '@react-three/drei';
-import { useMediaQuery } from 'react-responsive';
-import AnimatedHeaderSection from '../components/AnimatedHeaderSection';
+import { Canvas } from "@react-three/fiber";
+import { Planet } from "../components/Planet";
+import { Environment, Float, Lightformer } from "@react-three/drei";
+import { useMediaQuery } from "react-responsive";
+import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
+
+
+
 
 const Home = () => {
-const isMobile = useMediaQuery({maxWidth: 768});
-
-
-
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const text = `I help growing brands and startups gain an
+unfair advantage through premium
+results driven webs/apps`;
   return (
-    <scetion id="home" className="flex flex-col justify-end min-h-screen"
-    >
-      <AnimatedHeaderSection />
-  <figure
+    <section id="home" className="flex flex-col justify-end min-h-screen">
+      <AnimatedHeaderSection
+        subTitle={"404 No Bugs Found"}
+        title={"Mohamed monGe"}
+        text={text}
+        textColor={"text-black"}
+      />
+      <figure
         className="absolute inset-0 -z-50"
         style={{ width: "100vw", height: "100vh" }}
       >
@@ -25,7 +32,7 @@ const isMobile = useMediaQuery({maxWidth: 768});
           <Float speed={0.5}>
             <Planet scale={isMobile ? 0.7 : 1} />
           </Float>
-          <Environment resolution={240}>
+          <Environment resolution={256}>
             <group rotation={[-Math.PI / 3, 4, 1]}>
               <Lightformer
                 form={"circle"}
@@ -54,9 +61,9 @@ const isMobile = useMediaQuery({maxWidth: 768});
             </group>
           </Environment>
         </Canvas>
-      </figure>    
-  </scetion>
-  )                                
-}
+      </figure>
+    </section>
+  );
+};
 
-export default Home
+export default Home;
