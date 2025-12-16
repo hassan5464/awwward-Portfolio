@@ -5,6 +5,8 @@ import Services from './sections/Services'
 import ReactLenis from 'lenis/react'
 import About from './sections/About'
 import Works from './sections/Works'
+import ContactSummarysec from './sections/ContactSummarysec'
+import Contact from './sections/Contact'
 
 function App() {
 
@@ -17,6 +19,8 @@ function App() {
       <Services />
       <About />
       <Works/>
+      <ContactSummarysec />
+      <Contact />
     </ReactLenis>
   )
 }
